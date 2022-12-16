@@ -108,7 +108,7 @@ export default function Stats({
           />
         </>
       )}
-      <NumberUnit label={`Sale${sales === 1 ? '' : 's'}`} value={sales} />
+      <NumberUnit label={`Simulation${sales === 1 ? '' : 's'}`} value={sales} />
       <NumberUnit label="Published" value={assetsTotal} />
     </div>
   )

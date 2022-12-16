@@ -2,7 +2,7 @@ import React, { ReactElement } from 'react'
 import styles from './index.module.css'
 import Markdown from '../../atoms/Markdown'
 import { useSiteMetadata } from '../../../hooks/useSiteMetadata'
-import { ReactComponent as DeltaDaoLogo } from '../../../images/deltaDAO_Logo_small_RGB_white.svg'
+import { ReactComponent as PeproLogo } from '../../../images/perpetuumprogress.svg'
 import Links from './Links'
 import Container from '../../atoms/Container'
 
@@ -16,12 +16,12 @@ export default function Footer(): ReactElement {
         <div>
           <p className={styles.siteTitle}>{siteTitle}</p>
           <a
-            href="https://delta-dao.com"
+            href="https://perpetuum-progress.io/"
             target="_blank"
             rel="noopener noreferrer"
           >
             <div className={styles.main}>
-              <DeltaDaoLogo />
+              <PeproLogo />
               <p className={styles.subtitle}>{subtitle}</p>
             </div>
           </a>

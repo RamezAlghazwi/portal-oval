@@ -1,9 +1,9 @@
 :root {
   --brand-white: #ffffff;
   --brand-black: #141414;
-  --brand-pink: #ff4092;
+  --brand-pink: #d3c9f8;
   --brand-purple: #7b1173;
-  --brand-violet: #e000cf;
+  --brand-violet: #2520EA;
 
   --brand-grey-darker: #201f1f;
   --brand-grey-dark: #303030;
@@ -19,8 +19,8 @@
   --brand-alert-orange: #b35f36;
   --brand-alert-yellow: #eac146;
 
-  --color-primary: #ff4092;
-  --color-secondary: #8b98a9;
+  --color-primary: #e5dfff;
+  --color-secondary: #d3c9f8;
 
   /* Only use these vars for most color referencing for easy light/dark mode */
   --font-color-text: var(--brand-grey);
@@ -32,8 +32,7 @@
   --border-color: var(--brand-grey-lighter);
   --box-shadow-color: rgba(0, 0, 0, 0.05);
 
-  --font-family-base: -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica,
-    Arial, sans-serif;
+  --font-family-base: 'Montserrat', Helvetica, Arial, sans-serif;
   --font-family-heading: -apple-system, BlinkMacSystemFont, 'Segoe UI',
     Helvetica, Arial, sans-serif;
   --font-family-monospace: 'Fira Code', 'Fira Mono', Menlo, Monaco, Consolas,

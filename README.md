@@ -39,6 +39,16 @@ This will start the development server under
 To explore the generated GraphQL data structure fire up the accompanying GraphiQL IDE under
 `http://localhost:8000/__graphql`.
 
+To start with Docker
+
+docker build . -t portal-oval:latest
+
+This will start the container
+docker run -it --rm -v $(pwd)/src:/portal-oval/src -p 8000:8000 portal-oval:latest
+
+This will start the development server under
+`http://localhost:8000`.
+
 ## 🧊 Important Components
 
 The Pontus-X - Gaia-X Web3 Ecosystem uses Ocean Protocol under the hood. There are multiple Ocean components at work, for mor information please head to the [Ocean Market repository](https://github.com/oceanprotocol/market). To get a brief overview of important components at use in the Pontus-X context let's have a look at some of them:

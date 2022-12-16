@@ -1,10 +1,10 @@
 {
   "site": {
-    "siteTitle": "Pontus-X - Gaia-X Web3 Ecosystem",
-    "siteTagline": "A platform to find, publish and consume Service Offerings in the Gaia-X Test Network.",
+    "siteTitle": "OVAL - Perpetuum Progress Web3 Ecosystem",
+    "siteTagline": "Open distributed ecosystem for ADAS AD development based on GEN-X Test Network.",
     "siteUrl": "https://portal.minimal-gaia-x.eu",
     "siteIcon": "./src/images/siteIcon.png",
-    "siteImage": "../src/images/share.png",
+    "siteImage": "../src/images/liquid_cheese.png",
     "copyright": "All Rights Reserved. Powered by [Ocean Protocol](https://oceanprotocol.com). Built by [deltaDAO](https://delta-dao.com).",
     "menu": [
       {
@@ -59,8 +59,8 @@
     },
     "badge": "Powered by Ocean Protocol",
     "footer": {
-      "subtitle": "data economy solutions - GDPR compliant",
-      "copyright": "Built by [deltaDAO](https://delta-dao.com)",
+      "subtitle": "",
+      "copyright": "Built by [Perpetuum Progress](https://https://perpetuum-progress.io)",
       "privacyTitle": "Privacy",
       "content": [
         {

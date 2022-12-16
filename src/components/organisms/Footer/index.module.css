@@ -29,16 +29,16 @@
 }
 
 .main svg {
-  width: 15rem;
-  margin-left: -0.5rem;
-  margin-top: auto;
+  width: 12rem;
+  margin-left: 0rem;
+  margin-top: 1rem;
 }
 
 .subtitle {
-  position: absolute;
+  margin-top: auto;
+  position: relative;
   width: max-content;
-  top: 4rem;
-  left: 5rem;
+  top: 1rem;
 }
 
 .copyright a {
