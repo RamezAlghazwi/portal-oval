@@ -26,7 +26,6 @@ import Container from '../atoms/Container'
 import { useAddressConfig } from '../../hooks/useAddressConfig'
 import OnboardingSection from './Home/Onboarding'
 import SectionTitle from '../molecules/SectionTitle'
-import PromotionBanner from '../molecules/PromotionBanner'
 import { graphql, useStaticQuery } from 'gatsby'
 
 function sortElements(items: DDO[], sorted: string[]) {
@@ -244,13 +243,6 @@ export default function HomePage(): ReactElement {
           >
             All data sets and algorithms
           </Button>
-        </Container>
-        <Container>
-          <div>
-            {banners?.map((banner, i) => (
-              <PromotionBanner {...banner} key={i} />
-            ))}
-          </div>
         </Container>
         <section className={styles.intro}>
           <HomeIntro />
