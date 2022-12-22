@@ -1,9 +1,9 @@
 {
   "name": "@PerpetuumProgress/portal-oval",
-  "description": "Pontus-X - Gaia-X Web3 Ecosystem",
-  "version": "1.1.0",
+  "description": "OVAL - Perpetuum Progress Web3 Ecosystem",
+  "version": "1.0.0",
   "license": "Apache-2.0",
-  "homepage": "https://portal.minimal-gaia-x.eu",
+  "homepage": "https://oval.pepro.io",
   "scripts": {
     "start": "gatsby develop --host 0.0.0.0",
     "build": "gatsby build && cp _redirects public/_redirects",
