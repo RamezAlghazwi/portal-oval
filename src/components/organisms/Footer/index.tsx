@@ -7,14 +7,14 @@ import Links from './Links'
 import Container from '../../atoms/Container'
 
 export default function Footer(): ReactElement {
-  const { siteTitle, footer } = useSiteMetadata()
+  const { siteTagline, footer } = useSiteMetadata()
   const { copyright, subtitle } = footer
 
   return (
     <footer className={styles.footer}>
       <Container className={styles.container}>
         <div>
-          <p className={styles.siteTitle}>{siteTitle}</p>
+          <p className={styles.siteTitle}>{siteTagline}</p>
           <a
             href="https://perpetuum-progress.io/"
             target="_blank"
