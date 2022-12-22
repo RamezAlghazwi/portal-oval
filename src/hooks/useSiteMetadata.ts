@@ -3,6 +3,7 @@ import { useStaticQuery, graphql } from 'gatsby'
 interface UseSiteMetadata {
   siteTitle: string
   siteTagline: string
+  siteTaglineclean: string
   siteUrl: string
   siteIcon: string
   siteImage: { childImageSharp: { original: { src: string } } }
@@ -67,6 +68,7 @@ const query = graphql`
       siteMetadata {
         siteTitle
         siteTagline
+        siteTaglineclean
         siteUrl
         siteIcon
         copyright

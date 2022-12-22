@@ -2,6 +2,7 @@
   "site": {
     "siteTitle": "O V A L",
     "siteTagline": "**O**pen **VAL**idation - a distributed ecosystem for ADAS AD development.",
+    "siteTaglineclean": "Open VALidation - a distributed ecosystem for ADAS AD development.",
     "siteUrl": "https://oval.pepro.io",
     "siteIcon": "./src/images/siteIcon.png",
     "siteImage": "../src/images/liquid_cheese.png",
