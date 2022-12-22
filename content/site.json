@@ -1,11 +1,11 @@
 {
   "site": {
-    "siteTitle": "OVAL - Perpetuum Progress Web3 Ecosystem",
-    "siteTagline": "Open distributed ecosystem for ADAS AD development based on GEN-X Test Network.",
-    "siteUrl": "https://portal.minimal-gaia-x.eu",
+    "siteTitle": "O V A L",
+    "siteTagline": "**O**pen **VAL**idation - a distributed ecosystem for ADAS AD development.",
+    "siteUrl": "https://oval.pepro.io",
     "siteIcon": "./src/images/siteIcon.png",
     "siteImage": "../src/images/liquid_cheese.png",
-    "copyright": "All Rights Reserved. Powered by [Ocean Protocol](https://oceanprotocol.com). Built by [deltaDAO](https://delta-dao.com).",
+    "copyright": "All Rights Reserved. Powered by [Ocean Protocol](https://oceanprotocol.com) [deltaDAO](https://delta-dao.com). Built by [Perpetuum Progress](https://perpetuum-progress.io).",
     "menu": [
       {
         "name": "Catalogue",
@@ -60,7 +60,7 @@
     "badge": "Powered by Ocean Protocol",
     "footer": {
       "subtitle": "",
-      "copyright": "Built by [Perpetuum Progress](https://https://perpetuum-progress.io) powered by [Ocean Protocol](https://oceanprotocol.com/) & [deltaDAO](https://www.delta-dao.com/)",
+      "copyright": "Built by [Perpetuum Progress](https://perpetuum-progress.io) powered by [Ocean Protocol](https://oceanprotocol.com/) & [deltaDAO](https://www.delta-dao.com/)",
       "privacyTitle": "Privacy",
       "content": [
         {
