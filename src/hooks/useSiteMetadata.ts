@@ -59,6 +59,7 @@ interface UseSiteMetadata {
     defaultPrivacyPolicySlug: string
     privacyPreferenceCenter: string
     allowAdvancedPublishSettings: string
+    verifierApi: string
   }
 }
 
