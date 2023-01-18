@@ -1,4 +1,4 @@
-FROM node:18.12.1
+FROM node:16.14
 COPY . /home/node/portal-oval
 WORKDIR /home/node/portal-oval
 #ENV NODE_OPTIONS="--openssl-legacy-provider --no-experimental-fetch"
