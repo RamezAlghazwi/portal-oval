@@ -13,6 +13,12 @@
   //"dockerfile": "../DevContainerDockerfile"
   //},
   // Use 'forwardPorts' to make a list of ports inside the container available locally.
+  "remoteEnv": {
+		"LOCALWSF": "${localWorkspaceFolder}",
+		"CONTAINERWSF": "${containerWorkspaceFolder}"
+	},
+	"workspaceMount": "type=bind,src=${localWorkspaceFolder},dst=/home/node/portal-oval",
+	"workspaceFolder": "/home/node/portal-oval",
   "forwardPorts": [8000],
 
   // Configure tool-specific properties.
