@@ -41,8 +41,6 @@ spec:
             - name: {{ .name }}
               value: {{ .value }}
             {{- end }} 
-          command: ["/bin/sh"]
-          args: ["-c", "npm start"]
           ports:
             - name: http
               containerPort: 5000
