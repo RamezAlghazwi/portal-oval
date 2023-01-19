@@ -45,7 +45,7 @@ spec:
           args: ["-c", "npm start"]
           ports:
             - name: http
-              containerPort: 8000
+              containerPort: 5000
               protocol: TCP
           resources:
             {{- toYaml .Values.resources | nindent 12 }}

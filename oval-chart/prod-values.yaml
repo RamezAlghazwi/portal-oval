@@ -43,7 +43,7 @@ securityContext: {}
 
 service:
   type: ClusterIP
-  port: 8000
+  port: 5000
 
 ingress:
   enabled: true
