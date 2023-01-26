@@ -11,7 +11,7 @@ image:
   env:
     # environment variable for auqrius uri
     - name: "NEXT_PUBLIC_METADATACACHE_URI"
-      value: "http://metadatacache.oval.pepro.io:5000""
+      value: "http://metadatacache.oval.pepro.io:5000"
   # Overrides the image tag whose default is the chart appVersion.
   tag: "prod"
 
