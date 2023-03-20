@@ -1,108 +1,107 @@
 {
-  "site": {
-    "siteTitle": "O V A L",
-    "siteTagline": "**O**pen **VAL**idation - a distributed ecosystem for ADAS AD development.",
-    "siteTaglineclean": "Open VALidation - a distributed ecosystem for ADAS AD development.",
-    "siteUrl": "https://oval.pepro.io",
-    "siteIcon": "./src/images/siteIcon.png",
-    "siteImage": "../src/images/liquid_cheese.png",
-    "copyright": "All Rights Reserved. Powered by [Ocean Protocol](https://oceanprotocol.com) [deltaDAO](https://delta-dao.com). Built by [Perpetuum Progress](https://perpetuum-progress.io).",
-    "menu": [
-      {
-        "name": "Catalogue",
-        "link": "/search?sort=_score&sortOrder=desc&text="
-      },
-      {
-        "name": "Publish",
-        "link": "/publish"
-      },
-      {
-        "name": "Verify",
-        "link": "/verify"
-      },
-      {
-        "name": "Ecosystem",
-        "subItems": [
-          {
-            "name": "EuProGigant",
-            "link": "https://euprogigant.portal.minimal-gaia-x.eu"
-          },
-          {
-            "name": "moveID",
-            "link": "https://portal.moveid.eu"
-          },
-          {
-            "name": "Future Mobility",
-            "link": "https://marketplace.future-mobility-alliance.org"
-          },
-          {
-            "name": "PEAQ",
-            "link": "https://gaia-x.portal.peaq.network/"
-          },
-          {
-            "name": "Berlin State Library",
-            "link": "https://sbb.portal.minimal-gaia-x.eu/"
-          },
-          {
-            "name": "Universitat de Lleida",
-            "link": "https://udl.portal.minimal-gaia-x.eu/"
-          }
-        ]
-      }
-    ],
-    "warning": {
-      "main": "",
-      "polygonPublish": "Only republish data sets with a pool from ETH Mainnet into Polygon/Matic if the liquidity is **less than or equal to 1000 OCEAN in the original pool**. Doing otherwise will lead to [purgatory](https://github.com/oceanprotocol/list-purgatory) for the data set in Polygon/Matic."
+  "siteTitle": "Pontus-X - Gaia-X Web3 Ecosystem",
+  "siteTagline": "A platform to find, publish and consume Service Offerings in the Gaia-X Test Network.",
+  "siteUrl": "https://portal.minimal-gaia-x.eu",
+  "siteImage": "/share.png",
+  "copyright": "All Rights Reserved. Powered by [Ocean Protocol](https://oceanprotocol.com). Built by [deltaDAO](https://delta-dao.com).",
+  "menu": [
+    {
+      "name": "Catalogue",
+      "link": "/search?sort=nft.created&sortOrder=desc"
     },
-    "announcement": {
-      "main": "Ocean Market is [available on Polygon](https://blog.oceanprotocol.com/ocean-on-polygon-network-8abad19cbf47).",
-      "polygon": "Polygon/Matic EVM support is in early stages. [Use the Polygon Bridge](https://docs.oceanprotocol.com/tutorials/polygon-bridge/) to get mOCEAN."
+    {
+      "name": "Publish",
+      "link": "/publish/1"
     },
-    "badge": "Powered by Ocean Protocol",
-    "footer": {
-      "subtitle": "",
-      "copyright": "Built by [Perpetuum Progress](https://perpetuum-progress.io) powered by [Ocean Protocol](https://oceanprotocol.com/) & [deltaDAO](https://www.delta-dao.com/)",
-      "privacyTitle": "Privacy",
-      "content": [
+    {
+      "name": "Verify",
+      "link": "/verify"
+    },
+    {
+      "name": "Log",
+      "link": "https://explorer.genx.minimal-gaia-x.eu/"
+    },
+    {
+      "name": "Ecosystem",
+      "subItems": [
         {
-          "title": "External",
-          "links": [
-            {
-              "name": "Log",
-              "link": "https://explorer.genx.minimal-gaia-x.eu/"
-            },
-            {
-              "name": "GEN-X Faucet",
-              "link": "https://faucet.genx.minimal-gaia-x.eu/"
-            }
-          ]
+          "name": "EuProGigant",
+          "link": "https://euprogigant.portal.minimal-gaia-x.eu"
         },
         {
-          "title": "Navigation",
-          "links": [
-            {
-              "name": "Bookmarks",
-              "link": "/bookmarks"
-            },
-            {
-              "name": "Catalogue",
-              "link": "/search?sort=_score&sortOrder=desc&text="
-            },
-            {
-              "name": "Profile",
-              "link": "/profile"
-            },
-            {
-              "name": "Publish",
-              "link": "/publish"
-            },
-            {
-              "name": "Verify",
-              "link": "/verify"
-            }
-          ]
+          "name": "moveID",
+          "link": "https://portal.moveid.eu"
+        },
+        {
+          "name": "Future Mobility",
+          "link": "https://marketplace.future-mobility-alliance.org"
+        },
+        {
+          "name": "PEAQ",
+          "link": "https://gaia-x.portal.peaq.network/"
+        },
+        {
+          "name": "Berlin State Library",
+          "link": "https://sbb.portal.minimal-gaia-x.eu/"
+        },
+        {
+          "name": "Universitat de Lleida",
+          "link": "https://udl.portal.minimal-gaia-x.eu/"
+        },
+        {
+          "name": "Oval",
+          "link": "https://oval.pepro.io/"
         }
       ]
     }
+  ],
+  "announcement": "",
+  "warning": {
+    "ctd": "Please note that Compute-to-Data is still in alpha phase."
+  },
+  "footer": {
+    "subtitle": "data economy solutions - GDPR compliant",
+    "copyright": "Built by [deltaDAO](https://delta-dao.com)",
+    "privacyTitle": "Privacy",
+    "content": [
+      {
+        "title": "External",
+        "links": [
+          {
+            "name": "Log",
+            "link": "https://explorer.genx.minimal-gaia-x.eu/"
+          },
+          {
+            "name": "GEN-X Faucet",
+            "link": "https://faucet.genx.minimal-gaia-x.eu/"
+          }
+        ]
+      },
+      {
+        "title": "Navigation",
+        "links": [
+          {
+            "name": "Bookmarks",
+            "link": "/bookmarks"
+          },
+          {
+            "name": "Catalogue",
+            "link": "/search?sort=nft.created&sortOrder=desc"
+          },
+          {
+            "name": "Profile",
+            "link": "/profile"
+          },
+          {
+            "name": "Publish",
+            "link": "/publish/1"
+          },
+          {
+            "name": "Verify",
+            "link": "/verify"
+          }
+        ]
+      }
+    ]
   }
 }
