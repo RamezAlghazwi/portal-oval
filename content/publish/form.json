@@ -10,6 +10,13 @@
         "required": true
       },
       {
+        "name": "geojson",
+        "label": "Geo Data in GeoJsonForm",
+        "type": "geojson",
+        "help": "This field should contain metadata about the geo position",
+        "required": true
+      },
+      {
         "name": "type",
         "label": "Asset Type",
         "type": "boxSelection",

@@ -29,6 +29,7 @@ export interface FormPublishData {
     description: string
     author: string
     termsAndConditions: boolean
+    geojson: string
     gaiaXInformation: {
       termsAndConditions: FileInfo[]
       containsPII: GaiaXInformation2210['containsPII']

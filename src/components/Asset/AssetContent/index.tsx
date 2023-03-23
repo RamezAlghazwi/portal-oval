@@ -1,4 +1,5 @@
-import React, { ReactElement, useState, useEffect } from 'react'
+import React, { ReactElement, useState, useEffect, useMemo } from 'react'
+import dynamic from 'next/dynamic'
 import Markdown from '@shared/Markdown'
 import MetaFull from './MetaFull'
 import MetaSecondary from './MetaSecondary'
@@ -46,7 +47,14 @@ export default function AssetContent({
       )
     )
   }, [receipts])
-
+  const Map = useMemo(
+    () =>
+      dynamic(() => import('../../Map/map'), {
+        loading: () => <p>A map is loading</p>,
+        ssr: false
+      }),
+    []
+  )
   useEffect(() => {
     if (!isServiceSDVerified) return
     const serviceSD =
@@ -102,6 +110,14 @@ export default function AssetContent({
                 <MetaSecondary ddo={asset} />
               </>
             )}
+            {asset?.metadata?.type === 'dataset' &&
+              asset?.metadata?.additionalInformation?.geojson !== undefined && (
+                <Map
+                  dataLayer={[
+                    JSON.parse(asset?.metadata?.additionalInformation?.geojson)
+                  ]}
+                />
+              )}
             <MetaFull ddo={asset} />
             <EditHistory receipts={receipts} setReceipts={setReceipts} />
             {debug === true && <DebugOutput title="DDO" output={asset} />}

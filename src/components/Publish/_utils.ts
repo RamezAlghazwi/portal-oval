@@ -78,6 +78,7 @@ export async function transformPublishFormToDdo(
     tags,
     author,
     termsAndConditions,
+    geojson,
     dockerImage,
     dockerImageCustom,
     dockerImageCustomTag,
@@ -119,6 +120,7 @@ export async function transformPublishFormToDdo(
     links: linksTransformed,
     additionalInformation: {
       termsAndConditions,
+      geojson,
       gaiaXInformation: {
         termsAndConditions: [
           { url: accessTermsUrlTransformed || defaultAccessTerms }

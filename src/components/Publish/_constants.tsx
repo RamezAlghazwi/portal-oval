@@ -65,6 +65,7 @@ export const initialValues: FormPublishData = {
     description: '',
     tags: [],
     termsAndConditions: false,
+    geojson: '',
     dockerImage: '',
     dockerImageCustom: '',
     dockerImageCustomTag: '',
