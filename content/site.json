@@ -1,9 +1,9 @@
 {
-  "siteTitle": "OVAL Platform",
-  "siteTagline": "A Platform For Virtual Validation For ADAS/AD Systems.",
+  "siteTitle": "O V A L",
+  "siteTagline": "**O**pen **VAL**idation - a distributed ecosystem for ADAS AD development.",
   "siteUrl": "https://oval.pepro.io",
   "siteImage": "/share.png",
-  "copyright": "All Rights Reserved. Powered by [Ocean Protocol](https://oceanprotocol.com). Built by [deltaDAO](https://delta-dao.com).",
+  "copyright": "All Rights Reserved. Powered by [Ocean Protocol](https://oceanprotocol.com) [deltaDAO](https://delta-dao.com). Built by [Perpetuum Progress](https://perpetuum-progress.io).",
   "menu": [
     {
       "name": "Catalogue",
@@ -60,8 +60,8 @@
     "ctd": "Please note that Compute-to-Data is still in alpha phase."
   },
   "footer": {
-    "subtitle": "data economy solutions - GDPR compliant",
-    "copyright": "Built by [deltaDAO](https://delta-dao.com)",
+    "subtitle": "",
+    "copyright": "Built by [Perpetuum Progress](https://perpetuum-progress.io) powered by [Ocean Protocol](https://oceanprotocol.com/) & [deltaDAO](https://www.delta-dao.com/)",
     "privacyTitle": "Privacy",
     "content": [
       {

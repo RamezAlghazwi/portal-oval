@@ -8,6 +8,13 @@
   --brand-purple: #7300f3;
   --brand-violet: #b900ff;
 
+  /* Pepro brand color variables */
+  --brand-peproblue: #2520EA;
+  --brand-peprowhite: #d3c9f8;
+  --brand-peproprimary: #e5dfff;
+  --brand-peprosecondary: #d3c9f8;
+
+
   --brand-gradient: linear-gradient(
     to right bottom,
     var(--brand-cyan),

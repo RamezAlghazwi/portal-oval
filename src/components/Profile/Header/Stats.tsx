@@ -41,7 +41,7 @@ export default function Stats({
   return (
     <div className={styles.stats}>
       <NumberUnit
-        label="Total Sales"
+        label="Total Simulation"
         value={
           totalSales > 0 ? (
             <Conversion
@@ -55,7 +55,7 @@ export default function Stats({
         }
       />
       <NumberUnit
-        label={`Sale${sales === 1 ? '' : 's'}`}
+        label={`Simulations${sales === 1 ? '' : 's'}`}
         value={sales < 0 ? 0 : sales}
       />
       <NumberUnit label="Published" value={assetsTotal} />

@@ -2,8 +2,8 @@
 @import url('../../public//static/fonts/fonts.css');
 
 :root {
-  --color-primary: var(--brand-blue);
-  --color-secondary: var(--brand-grey-light);
+  --color-primary: var(--brand-peproprimary);
+  --color-secondary: var(--brand-peprosecondary);
   --color-highlight: var(--brand-blue);
 
   /* Only use these vars for most color referencing for easy light/dark mode */
@@ -128,8 +128,7 @@
   --confetti-color-four: var(--brand-grey-light);
   --confetti-color-five: var(--brand-grey-lighter);
 
-  --font-family-base: 'Titillium Web', -apple-system, BlinkMacSystemFont,
-    'Segoe UI', Helvetica, Arial, sans-serif;
+  --font-family-base: 'Montserrat', Helvetica, Arial, sans-serif;
   --font-family-heading: 'Titillium Web', -apple-system, BlinkMacSystemFont,
     'Segoe UI', Helvetica, Arial, sans-serif;
   --font-family-monospace: 'Fira Code', 'Fira Mono', Menlo, Monaco, Consolas,
