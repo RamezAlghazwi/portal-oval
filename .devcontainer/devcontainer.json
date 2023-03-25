@@ -1,7 +1,7 @@
 // For format details, see https://aka.ms/devcontainer.json. For config options, see the
 // README at: https://github.com/devcontainers/templates/tree/main/src/docker-existing-dockerfile
 {
-  //"name": "portal-oval",
+  "name": "portal-oval-devcontainer",
   // Choose an image
   "image": "node:16",
   // Build image from Dockerfile

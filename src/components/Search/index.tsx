@@ -15,6 +15,8 @@ import { useUserPreferences } from '@context/UserPreferences'
 import { useCancelToken } from '@hooks/useCancelToken'
 import styles from './index.module.css'
 import { useRouter } from 'next/router'
+import { FeatureCollection } from 'geojson'
+import { es } from 'date-fns/locale'
 
 export default function SearchPage({
   setTotalResults,
@@ -27,41 +29,13 @@ export default function SearchPage({
   const [parsed, setParsed] = useState<queryString.ParsedQuery<string>>()
   const { chainIds } = useUserPreferences()
   const [queryResult, setQueryResult] = useState<PagedAssets>()
+  const [geojsonField, setGeojsonField] = useState<FeatureCollection[]>()
   const [loading, setLoading] = useState<boolean>()
   const [serviceType, setServiceType] = useState<string>()
   const [accessType, setAccessType] = useState<string>()
   const [sortType, setSortType] = useState<string>()
   const [sortDirection, setSortDirection] = useState<string>()
   const newCancelToken = useCancelToken()
-  const geoData2 = {
-    type: 'FeatureCollection',
-    features: [
-      {
-        type: 'Feature',
-        properties: {},
-        geometry: {
-          type: 'LineString',
-          coordinates: [
-            [11.43226146697998, 48.77335941579284],
-            [11.432476043701172, 48.77244021326843],
-            [11.431403160095215, 48.77203010209762],
-            [11.428892612457275, 48.769187515357935],
-            [11.430180072784424, 48.76835309367359],
-            [11.430845260620115, 48.767787376170105],
-            [11.431446075439453, 48.76699536095809],
-            [11.431703567504883, 48.76642962815863],
-            [11.431746482849121, 48.76583560185989],
-            [11.431660652160645, 48.76568002238241],
-            [11.433227062225342, 48.76597703733026],
-            [11.433613300323486, 48.765128418532996],
-            [11.433699131011963, 48.76485968625767],
-            [11.434192657470703, 48.76495869305272],
-            [11.434385776519775, 48.764887973933305]
-          ]
-        }
-      }
-    ]
-  }
 
   const Map = useMemo(
     () =>
@@ -109,6 +83,27 @@ export default function SearchPage({
 
       setTotalResults(queryResult?.totalResults || 0)
       setTotalPagesNumber(queryResult?.totalPages || 0)
+      console.log('queryResult', queryResult)
+      // if queryResult is not undefined, get the metadata field from the queryResult
+      if (queryResult === undefined) {
+        console.log('queryResult is undefined')
+      } else {
+        console.log('queryResult is not undefined')
+        // get all metadata elements from the queryResult
+        const metadata = queryResult?.results?.map((asset) => asset.metadata)
+        // Filter those metadata elements that have a geojson field
+        console.log('metadata', metadata)
+        const geojson = metadata.filter(
+          (assetMetadata) => assetMetadata?.additionalInformation?.geojson
+        )
+        console.log('geojson', geojson)
+        // Get the geojson field from the filtered metadata elements
+        const geojsonField = geojson.map((filteredAsset) =>
+          JSON.parse(filteredAsset.additionalInformation.geojson)
+        )
+        console.log('geojsonField', geojsonField)
+        setGeojsonField(geojsonField)
+      }
       setLoading(false)
     },
     [newCancelToken, setTotalPagesNumber, setTotalResults]
@@ -143,9 +138,11 @@ export default function SearchPage({
           />
         </div>
       </div>
-      <section className={styles.section}>
-        <Map dataLayer={[geoData2]} />
-      </section>
+      {geojsonField && (
+        <section className={styles.section}>
+          <Map dataLayer={geojsonField} />
+        </section>
+      )}
       <div className={styles.results}>
         <AssetList
           assets={queryResult?.results}
