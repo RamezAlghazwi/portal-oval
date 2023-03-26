@@ -20,7 +20,7 @@ export default function Seo({
   const canonical = `${siteContent?.siteUrl}${uri}`.replace(/\/$/, '')
 
   const pageTitle = title
-    ? `${title} - ${siteContent?.siteTitle}`
+    ? `${siteContent?.siteTitle}`
     : `${siteContent?.siteTitle} — ${siteContent?.siteTagline}`
 
   const datasetSchema = DatasetSchema()
