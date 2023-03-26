@@ -139,12 +139,12 @@ export default function HomePage(): ReactElement {
         action={<AllAssetsButton />}
       />
       <SectionQueryResult
-        title="Most Sales"
+        title="Most Simulation"
         query={queryMostSales}
         action={<AllAssetsButton />}
       />
-      <TopSales title="Publishers With Most Sales" />
-      <TopTags title="Top Tags By Sales" />
+      <TopSales title="Publishers With Most Interactions" />
+      <TopTags title="Top Tags" />
       <HomeContent />
     </>
   )
