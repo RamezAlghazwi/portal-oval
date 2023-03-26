@@ -15,7 +15,7 @@ export default function Footer(): ReactElement {
     <footer className={styles.footer}>
       <Container className={styles.container}>
         <div>
-          <p className={styles.siteTitle}>{siteTitle}</p>
+          <p className={styles.siteTitle}></p>
           <a
             href="https://perpetuum-progress.io/"
             target="_blank"

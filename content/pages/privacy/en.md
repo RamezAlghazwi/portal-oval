@@ -1,6 +1,6 @@
 ---
 title: Privacy Policy
-description: This privacy policy informs you about how deltaDAO AG (in the following deltaDAO) processes your personal data when you visit our portal demonstrator, when you use one of our portal demonstrator functionalities and when you contact us. Moreover, this privacy policy informs you about your rights.
+description: This privacy policy informs you about how Perpetuum Progress GmbH (in the following Perpetuum Progress) processes your personal data when you visit our portal demonstrator, when you use one of our portal demonstrator functionalities and when you contact us. Moreover, this privacy policy informs you about your rights.
 ---
 
 _Last updated on December 16, 2022_

@@ -2,9 +2,9 @@
 @import url('../../public//static/fonts/fonts.css');
 
 :root {
-  --color-primary: var(--brand-peproprimary);
-  --color-secondary: var(--brand-peprosecondary);
-  --color-highlight: var(--brand-blue);
+  --color-primary: var(--brand-peproblue);
+  --color-secondary: var(--brand-peproviolet);
+  --color-highlight: var(--brand-peproturquoise);
 
   /* Only use these vars for most color referencing for easy light/dark mode */
   --font-color-text: var(--brand-grey);
