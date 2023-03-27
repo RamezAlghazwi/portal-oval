@@ -17,27 +17,16 @@ interface HomeContentData {
   paragraphs: {
     title: string
     body: string
-    cta: string
-    ctaTo: string
     image: string
   }[]
-  more: {
-    title: string
-    text: string
-    image: string
-  }
 }
 
 export default function HomeContent(): ReactElement {
-  const { paragraphs, teaser, more }: HomeContentData = content
+  const { paragraphs, teaser }: HomeContentData = content
 
   return (
     <Container>
       <div className={styles.container}>
-        <div className={styles.teaser}>
-          <h2>{teaser.title}</h2>
-          <Markdown text={teaser.text} />
-        </div>
         <div className={styles.paragraphs}>
           {paragraphs.map((paragraph, i) => (
             <div
@@ -57,18 +46,9 @@ export default function HomeContent(): ReactElement {
               <div className={styles.content}>
                 <h2>{paragraph.title}</h2>
                 <Markdown text={paragraph.body} />
-                <Button href={paragraph.ctaTo} style="primary">
-                  {paragraph.cta}
-                </Button>
               </div>
             </div>
           ))}
-        </div>
-        <div className={styles.teaser}>
-          <h2>{more.title}</h2>
-          <div className={styles.interactivity}>
-            <InteractiveModalImage src={more.image} alt={more.title} />
-          </div>
         </div>
       </div>
     </Container>
