@@ -21,10 +21,15 @@ interface HomeContentData {
     ctaTo: string
     image: string
   }[]
+  more: {
+    title: string
+    text: string
+    image: string
+  }
 }
 
 export default function HomeContent(): ReactElement {
-  const { paragraphs, teaser }: HomeContentData = content
+  const { paragraphs, teaser, more }: HomeContentData = content
 
   return (
     <Container>
@@ -58,6 +63,14 @@ export default function HomeContent(): ReactElement {
               </div>
             </div>
           ))}
+        </div>
+        <div className={styles.teaser}>
+          <div className={styles.interactivity}>
+                <InteractiveModalImage
+                  src={more.image}
+                  alt={more.title}
+                />
+              </div>
         </div>
       </div>
     </Container>

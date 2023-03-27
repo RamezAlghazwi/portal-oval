@@ -7,7 +7,14 @@
     {
       "title": "Concept",
       "body": "OVAL is a common decentralized infrastructure for the secure exchange of sensitive data for virtual validation. Valid for all validation stakeholders: OEM´s , ADAS Function developers, Sensor producers, Data Creators (ex. Tracks and Scenarios), Simulations Development providers or eventually Certification Entities. OVAL's virtual validation environment comprises the data assets and algorithms necessary to test the development of driver assistance functions.",
+      "cta": "Pepro Website",
+      "ctaTo": "https://perpetuum-progress.io/",
       "image": "/images/oval-concept.jpg"
     }
-  ]
+  ],
+  "more": {
+    "title": "OVAL",
+    "text": "",
+    "image": "/images/oval-concept.jpg"
+  }
 }
