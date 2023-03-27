@@ -66,11 +66,8 @@ export default function HomeContent(): ReactElement {
         </div>
         <div className={styles.teaser}>
           <div className={styles.interactivity}>
-                <InteractiveModalImage
-                  src={more.image}
-                  alt={more.title}
-                />
-              </div>
+            <InteractiveModalImage src={more.image} alt={more.title} />
+          </div>
         </div>
       </div>
     </Container>
