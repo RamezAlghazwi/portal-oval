@@ -1,7 +1,7 @@
 {
   "teaser": {
     "title": "OVAL",
-    "text": ""
+    "text": "Here you can find more information about OVAL."
   },
   "paragraphs": [
     {
@@ -15,6 +15,6 @@
   "more": {
     "title": "OVAL",
     "text": "",
-    "image": "/images/oval-concept.jpg"
+    "image": "/images/oval-keyfacts.jpg"
   }
 }
