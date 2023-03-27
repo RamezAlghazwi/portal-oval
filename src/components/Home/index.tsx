@@ -138,12 +138,6 @@ export default function HomePage(): ReactElement {
         query={queryRecent}
         action={<AllAssetsButton />}
       />
-      <SectionQueryResult
-        title="Most Simulation"
-        query={queryMostSales}
-        action={<AllAssetsButton />}
-      />
-      <TopSales title="Publishers With Most Interactions" />
       <TopTags title="Top Tags" />
       <HomeContent />
     </>
