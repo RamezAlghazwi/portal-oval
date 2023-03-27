@@ -55,6 +55,7 @@ export default function AssetContent({
       }),
     []
   )
+  console.log('asset', asset)
   useEffect(() => {
     if (!isServiceSDVerified) return
     const serviceSD =
@@ -111,7 +112,8 @@ export default function AssetContent({
               </>
             )}
             {asset?.metadata?.type === 'dataset' &&
-              asset?.metadata?.additionalInformation?.geojson !== undefined && (
+              asset?.metadata?.additionalInformation?.geojson !== undefined &&
+              asset?.metadata?.additionalInformation?.geojson !== '' && (
                 <Map
                   dataLayer={[
                     JSON.parse(asset?.metadata?.additionalInformation?.geojson)
