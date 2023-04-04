@@ -78,6 +78,7 @@ export default function SearchPage({
     async (parsed: queryString.ParsedQuery<string>, chainIds: number[]) => {
       setLoading(true)
       setTotalResults(undefined)
+      setGeojsonField(undefined)
       const queryResult = await getResults(parsed, chainIds, newCancelToken())
       setQueryResult(queryResult)
 
@@ -106,7 +107,7 @@ export default function SearchPage({
       }
       setLoading(false)
     },
-    [newCancelToken, setTotalPagesNumber, setTotalResults]
+    [newCancelToken, setTotalPagesNumber, setTotalResults, setGeojsonField]
   )
   useEffect(() => {
     if (!parsed || !queryResult) return
