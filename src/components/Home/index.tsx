@@ -10,6 +10,9 @@ import { useAddressConfig } from '@hooks/useAddressConfig'
 import TopSales from './TopSales'
 import TopTags from './TopTags'
 import HomeContent from './Content'
+import { Marker } from 'leaflet'
+import AssetActions from '@components/Asset/AssetActions'
+import AssetContent from '@components/Asset/AssetContent'
 
 interface FeaturedSection {
   title: string
@@ -32,7 +35,8 @@ function AllAssetsButton(): ReactElement {
 export default function HomePage(): ReactElement {
   const { chainIds } = useUserPreferences()
   const { featured, hasFeaturedAssets } = useAddressConfig()
-
+  const asset =
+    'did:op:025422379b72f683deb0facd08be6f87b845641116bf7f9f2cfbb0bc9efc82b6'
   const [queryFeatured, setQueryFeatured] = useState<FeaturedSection[]>([])
   const [queryRecent, setQueryRecent] = useState<SearchQuery>()
   const [queryMostSales, setQueryMostSales] = useState<SearchQuery>()
@@ -119,7 +123,7 @@ export default function HomePage(): ReactElement {
       <section className={styles.section}>
         {/* <h3>Bookmarks</h3>
         <Bookmarks /> */}
-        <Map dataLayer={[geoData2]} />
+        <Map dataLayer={[geoData2]} url={`/asset/${asset}`} />
       </section>
       {hasFeaturedAssets() && (
         <>

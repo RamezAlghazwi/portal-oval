@@ -16,7 +16,8 @@ import { useCancelToken } from '@hooks/useCancelToken'
 import styles from './index.module.css'
 import { useRouter } from 'next/router'
 import { FeatureCollection } from 'geojson'
-import { es } from 'date-fns/locale'
+import { es, id } from 'date-fns/locale'
+import { asset } from '.jest/__fixtures__/datasetWithAccessDetails'
 
 export default function SearchPage({
   setTotalResults,
@@ -30,6 +31,7 @@ export default function SearchPage({
   const { chainIds } = useUserPreferences()
   const [queryResult, setQueryResult] = useState<PagedAssets>()
   const [geojsonField, setGeojsonField] = useState<FeatureCollection[]>()
+  const [datasetdid, setDatasetdid] = useState<FeatureCollection[]>()
   const [loading, setLoading] = useState<boolean>()
   const [serviceType, setServiceType] = useState<string>()
   const [accessType, setAccessType] = useState<string>()
@@ -80,7 +82,6 @@ export default function SearchPage({
       setTotalResults(undefined)
       const queryResult = await getResults(parsed, chainIds, newCancelToken())
       setQueryResult(queryResult)
-
       setTotalResults(queryResult?.totalResults || 0)
       setTotalPagesNumber(queryResult?.totalPages || 0)
       console.log('queryResult', queryResult)
@@ -91,6 +92,10 @@ export default function SearchPage({
         console.log('queryResult is not undefined')
         // get all metadata elements from the queryResult
         const metadata = queryResult?.results?.map((asset) => asset.metadata)
+        // get data did of dataset for all datasets having geojson info
+        const datasetdid = queryResult?.results?.map((asset) => asset.id)
+        setDatasetdid(datasetdid)
+        console.log('datasetsdid', datasetdid)
         // Filter those metadata elements that have a geojson field
         console.log('metadata', metadata)
         const geojson = metadata.filter(
@@ -103,6 +108,7 @@ export default function SearchPage({
         )
         console.log('geojsonField', geojsonField)
         setGeojsonField(geojsonField)
+        // Get did of datasets
       }
       setLoading(false)
     },
@@ -140,7 +146,7 @@ export default function SearchPage({
       </div>
       {geojsonField && (
         <section className={styles.section}>
-          <Map dataLayer={geojsonField} />
+          <Map dataLayer={geojsonField} url={datasetdid} />
         </section>
       )}
       <div className={styles.results}>

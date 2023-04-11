@@ -118,6 +118,7 @@ export default function AssetContent({
                   dataLayer={[
                     JSON.parse(asset?.metadata?.additionalInformation?.geojson)
                   ]}
+                  url="https://perpetuum-progress.io/"
                 />
               )}
             <MetaFull ddo={asset} />

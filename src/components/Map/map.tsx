@@ -1,5 +1,5 @@
 import React from 'react'
-import { MapContainer, TileLayer, GeoJSON } from 'react-leaflet'
+import { MapContainer, TileLayer, GeoJSON, Marker, Popup } from 'react-leaflet'
 import 'leaflet/dist/leaflet.css'
 import 'leaflet-defaulticon-compatibility/dist/leaflet-defaulticon-compatibility.webpack.css' // Re-uses images from ~leaflet package
 import 'leaflet-defaulticon-compatibility'
@@ -363,7 +363,7 @@ const geoData2: GeoJSON.FeatureCollection<any> = {
 }
 
 // create a Map component that renders a Leaflet map and takes geoJSON data as a prop
-const Map = ({ dataLayer }: any) => {
+const Map = ({ dataLayer, url }: any) => {
   const itemList = []
   for (const geojson of dataLayer) {
     itemList.push(<GeoJSON data={geojson} />)
@@ -371,6 +371,13 @@ const Map = ({ dataLayer }: any) => {
   console.log('itemList', itemList)
   const router = useRouter()
   const { lng, lat, zoom } = router.query
+  console.log(router)
+  function handleMarkerClick() {
+    // getting dids of each dataset
+    for (const did of url) {
+      window.open(`/asset/${did}`, '_blank')
+    }
+  }
   return (
     <MapContainer
       center={[parseParamFloat(lat) || LAT, parseParamFloat(lng) || LNG]}
@@ -378,11 +385,15 @@ const Map = ({ dataLayer }: any) => {
       scrollWheelZoom={true}
       style={{ height: 400, width: '100%', zIndex: 0 }}
     >
+      <Marker
+        position={[parseParamFloat(lat) || LAT, parseParamFloat(lng) || LNG]}
+        eventHandlers={{ click: handleMarkerClick }}
+      ></Marker>
       <TileLayer
         url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
         attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
       />
-      {itemList}
+      {itemList} {url}
     </MapContainer>
   )
 }
