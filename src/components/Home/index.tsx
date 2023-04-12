@@ -35,8 +35,9 @@ function AllAssetsButton(): ReactElement {
 export default function HomePage(): ReactElement {
   const { chainIds } = useUserPreferences()
   const { featured, hasFeaturedAssets } = useAddressConfig()
-  const asset =
-    'did:op:025422379b72f683deb0facd08be6f87b845641116bf7f9f2cfbb0bc9efc82b6'
+  const asset = [
+    'did:op:f62ff55f4c056af42b1e8a9e69563b480e8d9d1d20016ebd7c9853e3531c5d94'
+  ]
   const [queryFeatured, setQueryFeatured] = useState<FeaturedSection[]>([])
   const [queryRecent, setQueryRecent] = useState<SearchQuery>()
   const [queryMostSales, setQueryMostSales] = useState<SearchQuery>()
@@ -123,7 +124,7 @@ export default function HomePage(): ReactElement {
       <section className={styles.section}>
         {/* <h3>Bookmarks</h3>
         <Bookmarks /> */}
-        <Map dataLayer={[geoData2]} url={`/asset/${asset}`} />
+        <Map dataLayer={[geoData2]} datasetwithgeojson={asset} />
       </section>
       {hasFeaturedAssets() && (
         <>

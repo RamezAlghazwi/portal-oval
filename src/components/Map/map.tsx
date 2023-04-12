@@ -5,6 +5,7 @@ import 'leaflet-defaulticon-compatibility/dist/leaflet-defaulticon-compatibility
 import 'leaflet-defaulticon-compatibility'
 import geoDataFromFile from './data.json'
 import { useRouter } from 'next/router'
+// import geodata from '../../map.json'
 
 const parseParamInt = (p: string | string[]): number =>
   parseInt(Array.isArray(p) ? p[0] : p, 10)
@@ -363,19 +364,24 @@ const geoData2: GeoJSON.FeatureCollection<any> = {
 }
 
 // create a Map component that renders a Leaflet map and takes geoJSON data as a prop
-const Map = ({ dataLayer, url }: any) => {
+const Map = ({ dataLayer, datasetwithgeojson }) => {
   const itemList = []
   for (const geojson of dataLayer) {
     itemList.push(<GeoJSON data={geojson} />)
   }
   console.log('itemList', itemList)
+  console.log('datasetwithgeojson', datasetwithgeojson)
   const router = useRouter()
   const { lng, lat, zoom } = router.query
-  console.log(router)
-  function handleMarkerClick() {
-    // getting dids of each dataset
-    for (const did of url) {
-      window.open(`/asset/${did}`, '_blank')
+  // console.log(router)
+  function handleMarkerClick(index) {
+    const did = datasetwithgeojson[index]
+    window.open(`/asset/${did}`, '_blank')
+  }
+  const createClickHandler = (index) => {
+    // Return a new function that will be used as the event handler
+    return () => {
+      handleMarkerClick(index)
     }
   }
   return (
@@ -385,15 +391,20 @@ const Map = ({ dataLayer, url }: any) => {
       scrollWheelZoom={true}
       style={{ height: 400, width: '100%', zIndex: 0 }}
     >
-      <Marker
-        position={[parseParamFloat(lat) || LAT, parseParamFloat(lng) || LNG]}
-        eventHandlers={{ click: handleMarkerClick }}
-      ></Marker>
+      {itemList.map((coord, index) => (
+        // eslint-disable-next-line react/jsx-key
+        <Marker
+          position={[
+            coord.props.data.features[0].geometry.coordinates[0][1],
+            coord.props.data.features[0].geometry.coordinates[0][0]
+          ]}
+          eventHandlers={{ click: createClickHandler(index) }}
+        ></Marker>
+      ))}
       <TileLayer
         url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
         attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
       />
-      {itemList} {url}
     </MapContainer>
   )
 }

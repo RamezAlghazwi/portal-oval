@@ -32,6 +32,7 @@ export default function SearchPage({
   const [queryResult, setQueryResult] = useState<PagedAssets>()
   const [geojsonField, setGeojsonField] = useState<FeatureCollection[]>()
   const [datasetdid, setDatasetdid] = useState<FeatureCollection[]>()
+  const [datasetwithgeojson, setdatasetwithgeojson] = useState<FeatureCollection[]>()
   const [loading, setLoading] = useState<boolean>()
   const [serviceType, setServiceType] = useState<string>()
   const [accessType, setAccessType] = useState<string>()
@@ -92,23 +93,39 @@ export default function SearchPage({
         console.log('queryResult is not undefined')
         // get all metadata elements from the queryResult
         const metadata = queryResult?.results?.map((asset) => asset.metadata)
-        // get data did of dataset for all datasets having geojson info
+        // get data did of all datasets
         const datasetdid = queryResult?.results?.map((asset) => asset.id)
-        setDatasetdid(datasetdid)
         console.log('datasetsdid', datasetdid)
+        setDatasetdid(datasetdid)
         // Filter those metadata elements that have a geojson field
         console.log('metadata', metadata)
         const geojson = metadata.filter(
           (assetMetadata) => assetMetadata?.additionalInformation?.geojson
         )
-        console.log('geojson', geojson)
+        // find did only for dataset having geojson field
+        const datasetwithgeojson = []
+        for (let i = 1; i < queryResult.results.length; i++) {
+          if (
+            queryResult.results[i].metadata.additionalInformation.geojson !==
+              '' &&
+            queryResult.results[i].metadata.additionalInformation.geojson !==
+              undefined
+          ) {
+            datasetwithgeojson.push(queryResult.results[i].id)
+            console.log('datasetwithgeojson', datasetwithgeojson)
+          } else {
+            console.log('geojson not defined')
+          }
+        }
+        console.log('datasetwithgeojson1', datasetwithgeojson)
+        setdatasetwithgeojson(datasetwithgeojson)
         // Get the geojson field from the filtered metadata elements
+        console.log('geojson', geojson)
         const geojsonField = geojson.map((filteredAsset) =>
           JSON.parse(filteredAsset.additionalInformation.geojson)
         )
         console.log('geojsonField', geojsonField)
         setGeojsonField(geojsonField)
-        // Get did of datasets
       }
       setLoading(false)
     },
@@ -146,7 +163,10 @@ export default function SearchPage({
       </div>
       {geojsonField && (
         <section className={styles.section}>
-          <Map dataLayer={geojsonField} url={datasetdid} />
+          <Map
+            dataLayer={geojsonField}
+            datasetwithgeojson={datasetwithgeojson}
+          />
         </section>
       )}
       <div className={styles.results}>
