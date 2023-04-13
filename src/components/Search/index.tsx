@@ -16,7 +16,8 @@ import { useCancelToken } from '@hooks/useCancelToken'
 import styles from './index.module.css'
 import { useRouter } from 'next/router'
 import { FeatureCollection } from 'geojson'
-import { es } from 'date-fns/locale'
+import { es, id } from 'date-fns/locale'
+import { asset } from '.jest/__fixtures__/datasetWithAccessDetails'
 
 export default function SearchPage({
   setTotalResults,
@@ -30,6 +31,9 @@ export default function SearchPage({
   const { chainIds } = useUserPreferences()
   const [queryResult, setQueryResult] = useState<PagedAssets>()
   const [geojsonField, setGeojsonField] = useState<FeatureCollection[]>()
+  const [datasetdid, setDatasetdid] = useState<FeatureCollection[]>()
+  const [datasetwithgeojson, setdatasetwithgeojson] =
+    useState<FeatureCollection[]>()
   const [loading, setLoading] = useState<boolean>()
   const [serviceType, setServiceType] = useState<string>()
   const [accessType, setAccessType] = useState<string>()
@@ -81,7 +85,6 @@ export default function SearchPage({
       setGeojsonField(undefined)
       const queryResult = await getResults(parsed, chainIds, newCancelToken())
       setQueryResult(queryResult)
-
       setTotalResults(queryResult?.totalResults || 0)
       setTotalPagesNumber(queryResult?.totalPages || 0)
       console.log('queryResult', queryResult)
@@ -92,13 +95,34 @@ export default function SearchPage({
         console.log('queryResult is not undefined')
         // get all metadata elements from the queryResult
         const metadata = queryResult?.results?.map((asset) => asset.metadata)
+        // get data did of all datasets
+        const datasetdid = queryResult?.results?.map((asset) => asset.id)
+        console.log('datasetsdid', datasetdid)
+        setDatasetdid(datasetdid)
         // Filter those metadata elements that have a geojson field
         console.log('metadata', metadata)
         const geojson = metadata.filter(
           (assetMetadata) => assetMetadata?.additionalInformation?.geojson
         )
-        console.log('geojson', geojson)
+        // find did only for dataset having geojson field
+        const datasetwithgeojson = []
+        for (let i = 1; i < queryResult.results.length; i++) {
+          if (
+            queryResult.results[i].metadata.additionalInformation.geojson !==
+              '' &&
+            queryResult.results[i].metadata.additionalInformation.geojson !==
+              undefined
+          ) {
+            datasetwithgeojson.push(queryResult.results[i].id)
+            console.log('datasetwithgeojson', datasetwithgeojson)
+          } else {
+            console.log('geojson not defined')
+          }
+        }
+        console.log('datasetwithgeojson1', datasetwithgeojson)
+        setdatasetwithgeojson(datasetwithgeojson)
         // Get the geojson field from the filtered metadata elements
+        console.log('geojson', geojson)
         const geojsonField = geojson.map((filteredAsset) =>
           JSON.parse(filteredAsset.additionalInformation.geojson)
         )
@@ -141,7 +165,10 @@ export default function SearchPage({
       </div>
       {geojsonField && (
         <section className={styles.section}>
-          <Map dataLayer={geojsonField} />
+          <Map
+            dataLayer={geojsonField}
+            datasetwithgeojson={datasetwithgeojson}
+          />
         </section>
       )}
       <div className={styles.results}>
