@@ -5,6 +5,7 @@ import 'leaflet-defaulticon-compatibility/dist/leaflet-defaulticon-compatibility
 import 'leaflet-defaulticon-compatibility'
 import geoDataFromFile from './data.json'
 import { useRouter } from 'next/router'
+import L from 'leaflet'
 // import geodata from '../../map.json'
 
 const parseParamInt = (p: string | string[]): number =>
@@ -384,6 +385,16 @@ const Map = ({ dataLayer, datasetwithgeojson }) => {
       handleMarkerClick(index)
     }
   }
+  const greenIcon = new L.Icon({
+    iconUrl:
+      'https://raw.githubusercontent.com/pointhi/leaflet-color-markers/master/img/marker-icon-2x-green.png',
+    shadowUrl:
+      'https://cdnjs.cloudflare.com/ajax/libs/leaflet/0.7.7/images/marker-shadow.png',
+    iconSize: [25, 41],
+    iconAnchor: [12, 41],
+    popupAnchor: [1, -34],
+    shadowSize: [41, 41]
+  })
   return (
     <MapContainer
       center={[parseParamFloat(lat) || LAT, parseParamFloat(lng) || LNG]}
@@ -395,16 +406,18 @@ const Map = ({ dataLayer, datasetwithgeojson }) => {
         // eslint-disable-next-line react/jsx-key
         <Marker
           position={[
-            coord.props.data.features[0].geometry.coordinates[0][1],
-            coord.props.data.features[0].geometry.coordinates[0][0]
+            coord.props.data.features[0].geometry.coordinates[1][1],
+            coord.props.data.features[0].geometry.coordinates[1][0]
           ]}
           eventHandlers={{ click: createClickHandler(index) }}
+          icon={greenIcon}
         ></Marker>
       ))}
       <TileLayer
         url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
         attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
       />
+      {itemList}
     </MapContainer>
   )
 }
