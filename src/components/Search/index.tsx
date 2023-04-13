@@ -32,7 +32,8 @@ export default function SearchPage({
   const [queryResult, setQueryResult] = useState<PagedAssets>()
   const [geojsonField, setGeojsonField] = useState<FeatureCollection[]>()
   const [datasetdid, setDatasetdid] = useState<FeatureCollection[]>()
-  const [datasetwithgeojson, setdatasetwithgeojson] = useState<FeatureCollection[]>()
+  const [datasetwithgeojson, setdatasetwithgeojson] =
+    useState<FeatureCollection[]>()
   const [loading, setLoading] = useState<boolean>()
   const [serviceType, setServiceType] = useState<string>()
   const [accessType, setAccessType] = useState<string>()
