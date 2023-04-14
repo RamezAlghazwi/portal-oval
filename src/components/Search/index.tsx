@@ -31,7 +31,7 @@ export default function SearchPage({
   const { chainIds } = useUserPreferences()
   const [queryResult, setQueryResult] = useState<PagedAssets>()
   const [geojsonField, setGeojsonField] = useState<FeatureCollection[]>()
-  const [datasetdid, setDatasetdid] = useState<FeatureCollection[]>()
+  // const [datasetdid, setDatasetdid] = useState<FeatureCollection[]>()
   const [datasetwithgeojson, setdatasetwithgeojson] =
     useState<FeatureCollection[]>()
   const [loading, setLoading] = useState<boolean>()
@@ -98,7 +98,7 @@ export default function SearchPage({
         // get data did of all datasets
         const datasetdid = queryResult?.results?.map((asset) => asset.id)
         console.log('datasetsdid', datasetdid)
-        setDatasetdid(datasetdid)
+        // setDatasetdid(datasetdid)
         // Filter those metadata elements that have a geojson field
         console.log('metadata', metadata)
         const geojson = metadata.filter(
