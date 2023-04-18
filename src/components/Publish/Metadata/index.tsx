@@ -1,7 +1,7 @@
 import { BoxSelectionOption } from '@shared/FormInput/InputElement/BoxSelection'
 import Input from '@shared/FormInput'
 import { Field, useField, useFormikContext } from 'formik'
-import React, { ReactElement, useEffect } from 'react'
+import React, { ReactElement, useCallback, useEffect, useState } from 'react'
 import content from '../../../../content/publish/form.json'
 import { FormPublishData } from '../_types'
 import IconDataset from '@images/dataset.svg'
@@ -11,12 +11,16 @@ import { algorithmContainerPresets } from '../_constants'
 import Alert from '@shared/atoms/Alert'
 import { useMarketMetadata } from '@context/MarketMetadata'
 import { getFieldContent } from '@utils/form'
+import { useDropzone } from 'react-dropzone'
+import { error } from 'console'
+import { read } from 'fs'
+import geoDataFromFile from '../../Map/data.json'
+import { json } from 'stream/consumers'
 
 const assetTypeOptionsTitles = getFieldContent(
   'type',
   content.metadata.fields
 ).options
-
 export default function MetadataFields(): ReactElement {
   const { siteContent } = useMarketMetadata()
 
@@ -63,6 +67,21 @@ export default function MetadataFields(): ReactElement {
   }, [values.metadata.type])
 
   dockerImageOptions.push({ name: 'custom', title: 'Custom', checked: false })
+  // test purpose for uplaod files
+  function handleFileRead(event) {
+    const jsonData = JSON.parse(event.target.result)
+    console.log('jsonfromfile', jsonData)
+  }
+  const [fileName, setFileName] = useState()
+  function handleFile(event) {
+    setFileName(event.target.files[0].name)
+    const uploadedFile = event.target.files[0]
+    // setFile(uploadedFile)
+    console.log(uploadedFile)
+    const reader = new FileReader()
+    reader.onload = handleFileRead
+    reader.readAsText(uploadedFile)
+  }
 
   return (
     <>
@@ -94,6 +113,18 @@ export default function MetadataFields(): ReactElement {
           component={Input}
           name="metadata.geojson"
         />
+      )}
+
+      {values.metadata.type === 'dataset' && (
+        <>
+          <Field
+            {...getFieldContent('geojsonasFile', content.metadata.fields)}
+            component={Input}
+            name="metadata.geojsonasFile"
+            type="file"
+            onChange={handleFile}
+          />
+        </>
       )}
 
       <Field
