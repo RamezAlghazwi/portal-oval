@@ -11,7 +11,7 @@
       },
       {
         "name": "geojson",
-        "label": "Geo Data in GeoJsonForm either text or filedrop",
+        "label": "Geo Data in GeoJsonForm",
         "type": "geojson",
         "help": "This field should contain metadata about the geo position",
         "required": true
@@ -21,6 +21,32 @@
         "label": "Geo Data as filedrop",
         "type": "geojsonasFile",
         "help": "This field should contain metadata about the geo position in a json file",
+        "required": true
+      },
+      {
+        "name": "geojson2",
+        "label": "Geo Data either as text or file drop",
+        "help": "This field should contain metadata about the geo position in a json file",
+        "type": "tabs",
+        "fields": [
+          {
+            "name": "geojsonasFile",
+            "title": "File",
+            "label": "Geo Data as filedrop",
+            "type": "geojsonasFile",
+            "help": "This field should contain metadata about the geo position in a json file",
+            "required": true
+          },
+          {
+            "name": "geojson",
+            "title": "Text",
+            "label": "Geo Data in GeoJsonForm",
+            "type": "geojson",
+            "help": "This field should contain metadata about the geo position",
+            "required": true
+          }
+        ],
+        "sortOptions": false,
         "required": true
       },
       {

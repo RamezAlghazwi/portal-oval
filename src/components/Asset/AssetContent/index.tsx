@@ -116,7 +116,10 @@ export default function AssetContent({
               asset?.metadata?.additionalInformation?.geojson !== '' && (
                 <Map
                   dataLayer={[
-                    JSON.parse(asset?.metadata?.additionalInformation?.geojson)
+                    JSON.parse(asset?.metadata?.additionalInformation?.geojson),
+                    JSON.parse(
+                      asset?.metadata?.additionalInformation?.geojsonasFile
+                    )
                   ]}
                   datasetwithgeojson={[]}
                 />

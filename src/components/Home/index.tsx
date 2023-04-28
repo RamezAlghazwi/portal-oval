@@ -13,6 +13,8 @@ import HomeContent from './Content'
 import { Marker } from 'leaflet'
 import AssetActions from '@components/Asset/AssetActions'
 import AssetContent from '@components/Asset/AssetContent'
+import gjsonfFile from '../Map/map.json'
+import { stringify } from 'querystring'
 
 interface FeaturedSection {
   title: string
@@ -70,6 +72,9 @@ export default function HomePage(): ReactElement {
       }
     ]
   }
+
+  // const obj = JSON.parse(JSON.stringify(gjsonfFile))
+  // console.log('obj', obj)
 
   const Map = useMemo(
     () =>

@@ -111,7 +111,7 @@ export default function Input(props: Partial<InputProps>): ReactElement {
     field: true,
     hasError: hasFormikError
   })
-
+  console.log('we are here')
   const [disclaimerVisible, setDisclaimerVisible] = useState(true)
 
   useEffect(() => {

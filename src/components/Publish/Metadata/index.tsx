@@ -15,7 +15,9 @@ import { useDropzone } from 'react-dropzone'
 import { error } from 'console'
 import { read } from 'fs'
 import geoDataFromFile from '../../Map/data.json'
-import { json } from 'stream/consumers'
+import { json, text } from 'stream/consumers'
+import { string } from 'yup'
+import { FeatureCollection } from 'geojson'
 
 const assetTypeOptionsTitles = getFieldContent(
   'type',
@@ -28,6 +30,8 @@ export default function MetadataFields(): ReactElement {
   const { values, setFieldValue } = useFormikContext<FormPublishData>()
 
   const [field, meta] = useField('metadata.dockerImageCustomChecksum')
+
+  const [jsonData, setjsonData] = useState<FeatureCollection[]>()
 
   // BoxSelection component is not a Formik component
   // so we need to handle checked state manually.
@@ -67,21 +71,64 @@ export default function MetadataFields(): ReactElement {
   }, [values.metadata.type])
 
   dockerImageOptions.push({ name: 'custom', title: 'Custom', checked: false })
-  // test purpose for uplaod files
+  // ******************************* //
+  // test cases to allow both text and file upload
   function handleFileRead(event) {
-    const jsonData = JSON.parse(event.target.result)
-    console.log('jsonfromfile', jsonData)
+    const jsonDatalocal = JSON.parse(event.target.result)
+    setjsonData(jsonDatalocal)
   }
+  // console.log('jsonfromfile', jsonData)
   const [fileName, setFileName] = useState()
   function handleFile(event) {
     setFileName(event.target.files[0].name)
     const uploadedFile = event.target.files[0]
     // setFile(uploadedFile)
-    console.log(uploadedFile)
+    console.log('i am here')
     const reader = new FileReader()
     reader.onload = handleFileRead
     reader.readAsText(uploadedFile)
   }
+
+  const [text, setText] = useState('')
+  const [file, setFile] = useState(null)
+  const [inputType, setInputType] = useState('text')
+  const [value, setValue] = useState('')
+
+  const handleTextChange = (event) => {
+    setText(event.target.value)
+  }
+
+  const handleFileChange = (event) => {
+    const selectedFile = event.target.files[0]
+    setFile(selectedFile)
+    console.log('selected file', selectedFile)
+    console.log('i am file selection')
+    const reader = new FileReader()
+    reader.onload = handleFileRead
+    reader.readAsText(selectedFile)
+    console.log('selected file', selectedFile)
+  }
+
+  const handleSubmit = (event) => {
+    event.preventDefault()
+    // handle form submission with both text and file data
+    console.log(text, file)
+  }
+  const handleRadioChange = (event) => {
+    const selectedValue = event.target.value
+    setInputType(selectedValue)
+  }
+  const handleValueChange = (event) => {
+    setValue(event.target.value)
+    console.log(event.target.value)
+  }
+  const [activeTab, setActiveTab] = useState('tab1')
+  const handleTabClick = (tab) => {
+    setActiveTab(tab)
+    console.log('tab', tab)
+  }
+
+  // ************************************************** //
 
   return (
     <>
@@ -111,6 +158,7 @@ export default function MetadataFields(): ReactElement {
         <Field
           {...getFieldContent('geojson', content.metadata.fields)}
           component={Input}
+          type="text"
           name="metadata.geojson"
         />
       )}
@@ -121,10 +169,47 @@ export default function MetadataFields(): ReactElement {
             {...getFieldContent('geojsonasFile', content.metadata.fields)}
             component={Input}
             name="metadata.geojsonasFile"
-            type="file"
-            onChange={handleFile}
           />
+          <form>
+            <label>
+              <input
+                {...getFieldContent('geojsonasFile', content.metadata.fields)}
+                name="metadata.geojsonasFile"
+                type="radio"
+                value="text"
+                checked={inputType === 'text'}
+                onChange={handleRadioChange}
+              />
+              Text Input
+            </label>
+            <label>
+              <input
+                {...getFieldContent('geojsonasFile', content.metadata.fields)}
+                name="metadata.geojsonasFile"
+                type="radio"
+                value="file"
+                checked={inputType === 'file'}
+                onChange={handleRadioChange}
+              />
+              File Input
+            </label>
+            <br />
+            {inputType === 'text' ? (
+              <input type="text" value={value} onChange={handleValueChange} />
+            ) : (
+              <input type="file" onChange={handleFileChange} />
+            )}
+            <br />
+          </form>
         </>
+      )}
+
+      {values.metadata.type === 'dataset' && (
+        <Field
+          {...getFieldContent('geojson2', content.metadata.fields)}
+          component={Input}
+          name="metadata.geojson2"
+        />
       )}
 
       <Field

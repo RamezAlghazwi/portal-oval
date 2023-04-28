@@ -13,7 +13,7 @@ describe('Tabs', () => {
 
   test('should fire custom change handler', async () => {
     const handler = jest.fn()
-    render(<Default {...Default.args} handleTabChange={handler} />)
+    render(<Default {...Default.args} ={handler} />)
 
     fireEvent.click(screen.getByText('Second tab'))
     expect(handler).toBeCalledTimes(1)
