@@ -1,3 +1,4 @@
+// working code for center .
 import React from 'react'
 import { MapContainer, TileLayer, GeoJSON, Marker, Popup } from 'react-leaflet'
 import 'leaflet/dist/leaflet.css'
@@ -366,12 +367,65 @@ const geoData2: GeoJSON.FeatureCollection<any> = {
 
 // create a Map component that renders a Leaflet map and takes geoJSON data as a prop
 const Map = ({ dataLayer, datasetwithgeojson }) => {
+  // start of calculating the avg of all points ....
+  // New helper function to compute average latitude and longitude
+  const calculateAverageCoords = (dataLayer) => {
+    let totalLat = 0
+    let totalLong = 0
+    let totalPoints = 0
+
+    // Iterate over each item in the geojsonField array
+    for (const geojson of dataLayer) {
+      for (const feature of geojson.features) {
+        if (feature.geometry.type === 'Polygon') {
+          // Each item in the coordinates array is an array of points forming the polygon
+          for (const polygon of feature.geometry.coordinates) {
+            for (const [longitude, latitude] of polygon) {
+              totalLat += latitude
+              totalLong += longitude
+              totalPoints++
+            }
+          }
+        } else if (feature.geometry.type === 'MultiPoint') {
+          // Each item in the coordinates array is a point
+          for (const [longitude, latitude] of feature.geometry.coordinates) {
+            totalLat += latitude
+            totalLong += longitude
+            totalPoints++
+          }
+        } else if (feature.geometry.type === 'Point') {
+          const [longitude, latitude] = feature.geometry.coordinates
+          totalLat += latitude
+          totalLong += longitude
+          totalPoints++
+        } else if (feature.geometry.type === 'LineString') {
+          // Each item in the coordinates array is a point on the line
+          for (const [longitude, latitude] of feature.geometry.coordinates) {
+            totalLat += latitude
+            totalLong += longitude
+            totalPoints++
+          }
+        }
+      }
+    }
+    // to check if the total points is not 0 so that we don't divide by zero
+    if (totalPoints === 0) {
+      return [LAT, LNG]
+    }
+
+    return [totalLat / totalPoints, totalLong / totalPoints]
+  }
+  // end of calculating the avg of all points.
+  const avgOfAllPoints = calculateAverageCoords(dataLayer)
   const itemList = []
   for (const geojson of dataLayer) {
     itemList.push(<GeoJSON data={geojson} />)
   }
-  console.log('itemList', itemList)
-  console.log('datasetwithgeojson', datasetwithgeojson)
+  // console.log('itemList', itemList)
+  // console.log('datasetwithgeojson', datasetwithgeojson)
+  const avgLat = avgOfAllPoints[0]
+  const avgLon = avgOfAllPoints[1]
+  console.log(avgOfAllPoints)
   const router = useRouter()
   const { lng, lat, zoom } = router.query
   // console.log(router)
@@ -397,7 +451,7 @@ const Map = ({ dataLayer, datasetwithgeojson }) => {
   })
   return (
     <MapContainer
-      center={[parseParamFloat(lat) || LAT, parseParamFloat(lng) || LNG]}
+      center={[avgLat, avgLon]}
       zoom={parseParamInt(zoom) || ZOOM}
       scrollWheelZoom={true}
       style={{ height: 400, width: '100%', zIndex: 0 }}
