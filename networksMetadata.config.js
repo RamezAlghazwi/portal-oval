@@ -7,18 +7,24 @@ const networksMetadata = [
   {
     name: 'GEN-X Testnet',
     chain: 'GEN-X',
-    network: 'testnet',
     rpc: ['https://rpc.genx.minimal-gaia-x.eu'],
     faucets: [],
     nativeCurrency: {
-      name: 'GEN-X',
+      name: 'GEN-X Token',
       symbol: 'GX',
       decimals: 18
     },
-    infoURL: '',
+    infoURL: 'https://docs.genx.minimal-gaia-x.eu',
     shortName: 'GEN-X',
     chainId: GEN_X_NETWORK_ID,
-    networkId: GEN_X_NETWORK_ID
+    networkId: GEN_X_NETWORK_ID,
+    explorers: [
+      {
+        name: 'Exchange Logging Service',
+        url: 'https://logging.genx.minimal-gaia-x.eu/',
+        standard: ''
+      }
+    ]
   }
 ]
 

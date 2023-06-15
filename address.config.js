@@ -1,16 +1,24 @@
 module.exports = {
   whitelists: {
-    'publicKey.owner': ['0x2ee3c4F19f90237B7C45cfAD6B5dC4b5840563Ec'],
-    dataToken: []
+    'nft.owner': ['0x2ee3c4F19f90237B7C45cfAD6B5dC4b5840563Ec','0x2650e382770A04bE0f7E362ed578FB261A60F4b3'],
+    'datatokens.address': []
   },
   featured: [
     {
-      title: 'Tracks & Szenarios',
-      assets: ['did:op:5E2cd5bCC8ab1A6227b54626ecc9481cE18ACBF9']
+      title: 'Industry',
+      assets: []
     },
     {
-      title: 'Simulators',
-      assets: ['did:op:76b92C812Ac384425865329b1162fea6Af9246D1']
+      title: 'Mobility',
+      assets: []
+    },
+    {
+      title: 'Science',
+      assets: []
+    },
+    {
+      title: 'Health, Finance, Business Analytics, Energy and more',
+      assets: []
     }
   ]
 }

@@ -4,16 +4,19 @@ module.exports = {
   // URI of single metadata cache instance for all networks.
   // While ocean.js includes this value for each network as part of its ConfigHelper,
   // it is assumed to be the same for all networks.
-  // In components can be accessed with the useSiteMetadata hook:
-  // const { appConfig } = useSiteMetadata()
+  // In components can be accessed with the useMarketMetadata hook:
+  // const { appConfig } = useMarketMetadata()
   // return appConfig.metadataCacheUri
   metadataCacheUri:
-    process.env.GATSBY_METADATACACHE_URI || 'https://aquarius.delta-dao.com',
+    process.env.NEXT_PUBLIC_METADATACACHE_URI ||
+    'https://aquarius.v4.delta-dao.com',
 
   complianceUri:
-    process.env.GATSBY_COMPLIANCE_URI || 'https://compliance.gaia-x.eu',
+    process.env.NEXT_PUBLIC_COMPLIANCE_URI ||
+    'https://compliance.lab.gaia-x.eu/development',
 
-  complianceApiVersion: process.env.GATSBY_COMPLIANCE_API_VERSION || '2206',
+  complianceApiVersion:
+    process.env.NEXT_PUBLIC_COMPLIANCE_API_VERSION || '2210',
 
   // List of chainIds which metadata cache queries will return by default.
   // This preselects the Chains user preferences.
@@ -22,14 +25,26 @@ module.exports = {
   // List of all supported chainIds. Used to populate the Chains user preferences list.
   chainIdsSupported: getSupportedChainIds(),
 
-  rbacUrl: process.env.GATSBY_RBAC_URL,
+  infuraProjectId: process.env.NEXT_PUBLIC_INFURA_PROJECT_ID || 'xxx',
 
-  infuraProjectId: process.env.GATSBY_INFURA_PROJECT_ID || 'xxx',
-
+  defaultDatatokenTemplateIndex: 2,
   // The ETH address the marketplace fee will be sent to.
   marketFeeAddress:
-    process.env.GATSBY_MARKET_FEE_ADDRESS ||
+    process.env.NEXT_PUBLIC_MARKET_FEE_ADDRESS ||
     '0x9984b2453eC7D99a73A5B3a46Da81f197B753C8d',
+  // publisher market fee that is taken upon ordering an asset, it is an absolute value, it is declared on erc20 creation
+  publisherMarketOrderFee:
+    process.env.NEXT_PUBLIC_PUBLISHER_MARKET_ORDER_FEE || '0',
+  // fee recieved by the publisher market when a dt is bought from a fixed rate exchange, percent
+  publisherMarketFixedSwapFee:
+    process.env.NEXT_PUBLIC_PUBLISHER_MARKET_FIXED_SWAP_FEE || '0',
+
+  // consume market fee that is taken upon ordering an asset, it is an absolute value, it is specified on order
+  consumeMarketOrderFee:
+    process.env.NEXT_PUBLIC_CONSUME_MARKET_ORDER_FEE || '0',
+  // fee recieved by the consume market when a dt is bought from a fixed rate exchange, percent
+  consumeMarketFixedSwapFee:
+    process.env.NEXT_PUBLIC_CONSUME_MARKET_FIXED_SWAP_FEE || '0',
 
   // Used for conversion display, can be whatever coingecko API supports
   // see: https://api.coingecko.com/api/v3/simple/supported_vs_currencies
@@ -49,27 +64,22 @@ module.exports = {
     'LINK'
   ],
 
-  // Config for https://github.com/donavon/use-dark-mode
+  // Tokens to fetch the spot prices from coingecko, against above currencies.
+  // Refers to Coingecko API tokenIds.
+  coingeckoTokenIds: ['ocean-protocol', 'h2o', 'ethereum', 'matic-network'],
+
+  // Config for https://github.com/oceanprotocol/use-dark-mode
   darkModeConfig: {
     classNameDark: 'dark',
     classNameLight: 'light',
     storageKey: 'oceanDarkMode'
   },
 
-  // Wallets
-  portisId: process.env.GATSBY_PORTIS_ID || 'xxx',
-
   // Used to show or hide the fixed, dynamic or free price options
   // tab to publishers during the price creation.
-  allowFixedPricing: process.env.GATSBY_ALLOW_FIXED_PRICING || 'true',
-  allowDynamicPricing: process.env.GATSBY_ALLOW_DYNAMIC_PRICING || 'false',
-  allowFreePricing: process.env.GATSBY_ALLOW_FREE_PRICING || 'false',
-
-  // Used to show or hide advanced settings button in asset details page
-  allowAdvancedSettings: process.env.GATSBY_ALLOW_ADVANCED_SETTINGS || 'true',
-  allowAdvancedPublishSettings:
-    process.env.GATSBY_ALLOW_ADVANCED_PUBLISH_SETTINGS || 'false',
-  credentialType: process.env.GATSBY_CREDENTIAL_TYPE || 'address',
+  allowFixedPricing: process.env.NEXT_PUBLIC_ALLOW_FIXED_PRICING || 'true',
+  allowDynamicPricing: process.env.NEXT_PUBLIC_ALLOW_DYNAMIC_PRICING || 'false',
+  allowFreePricing: process.env.NEXT_PUBLIC_ALLOW_FREE_PRICING || 'true',
 
   // Set the default privacy policy to initially display
   // this should be the slug of your default policy markdown file
@@ -81,9 +91,9 @@ module.exports = {
   // is used to create and show a privacy preference center / cookie banner
   // To learn more about how to configure and use this, please refer to the readme
   privacyPreferenceCenter:
-    process.env.GATSBY_PRIVACY_PREFERENCE_CENTER || 'true',
+    process.env.NEXT_PUBLIC_PRIVACY_PREFERENCE_CENTER || 'true',
 
-  // Base URI of the Polygon ID verifier API used to verify any claims/credentials
-  verifierApi:
-    process.env.GATSBY_VERIFIER_API || 'https://verifier.id.delta-dao.com'
+  // Default terms to be used for service offerings made on this marketplace
+  defaultAccessTerms:
+    'https://raw.githubusercontent.com/deltaDAO/mvg-portal/v4/content/pages/terms.md'
 }
