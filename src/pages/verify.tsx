@@ -1,54 +1,23 @@
 import React, { ReactElement } from 'react'
-import PageVerify from '../components/pages/Verify'
-import Page from '../components/templates/Page'
-import { graphql, PageProps } from 'gatsby'
-import OceanProvider from '../providers/Ocean'
-import queryString from 'query-string'
+import { useRouter } from 'next/router'
+import PageVerify from '../components/Verify'
+import AssetProvider from '@context/Asset'
+import content from '../../content/pages/verify.json'
+import Page from '@components/@shared/Page'
 
-export default function PageGatsbyVerify(props: PageProps): ReactElement {
-  const content = (props.data as any).content.edges[0].node.childVerifyJson
-  const { title, description } = content
-  const { did } = queryString.parse(props.location.search)
+export default function PageAssetDetails(): ReactElement {
+  const router = useRouter()
+  const { did } = router.query
+
   return (
-    <OceanProvider>
-      <Page title={title} description={description} uri={props.uri}>
-        <PageVerify content={content} didQueryString={did as string} />
+    <AssetProvider did={did as string}>
+      <Page
+        title={content.title}
+        description={content.description}
+        uri={router.route}
+      >
+        <PageVerify didQueryString={did as string} />
       </Page>
-    </OceanProvider>
+    </AssetProvider>
   )
 }
-
-export const contentQuery = graphql`
-  query VerifyPageQuery {
-    content: allFile(
-      filter: { relativePath: { eq: "pages/verify/index.json" } }
-    ) {
-      edges {
-        node {
-          childVerifyJson {
-            title
-            description
-            input {
-              label
-              placeholder
-              buttonLabel
-            }
-            serviceSelfDescriptionSection {
-              title
-              badgeLabel
-            }
-            errorSection {
-              title
-              badgeLabel
-            }
-            errorList {
-              invalidDid
-              noServiceSelfDescription
-              default
-            }
-          }
-        }
-      }
-    }
-  }
-`
