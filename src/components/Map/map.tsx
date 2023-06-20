@@ -363,15 +363,153 @@ const geoData2: GeoJSON.FeatureCollection<any> = {
     }
   ]
 }
+// code to calculate the boundary box for the map .
+const calculateBoundingBox = (dataLayer) => {
+  let minLat = Infinity
+  let maxLat = -Infinity
+  let minLng = Infinity
+  let maxLng = -Infinity
 
+  for (const geojson of dataLayer) {
+    for (const feature of geojson.features) {
+      const { coordinates } = feature.geometry
+      if (
+        feature.geometry.type === 'Polygon' ||
+        feature.geometry.type === 'MultiPolygon'
+      ) {
+        for (const polygon of coordinates) {
+          for (const ring of polygon) {
+            for (const [lng, lat] of ring) {
+              minLat = Math.min(lat, minLat)
+              maxLat = Math.max(lat, maxLat)
+              minLng = Math.min(lng, minLng)
+              maxLng = Math.max(lng, maxLng)
+            }
+          }
+        }
+      } else if (feature.geometry.type === 'LineString') {
+        for (const [lng, lat] of coordinates) {
+          minLat = Math.min(lat, minLat)
+          maxLat = Math.max(lat, maxLat)
+          minLng = Math.min(lng, minLng)
+          maxLng = Math.max(lng, maxLng)
+        }
+      } else if (feature.geometry.type === 'MultiPoint') {
+        for (const [lng, lat] of coordinates) {
+          minLat = Math.min(lat, minLat)
+          maxLat = Math.max(lat, maxLat)
+          minLng = Math.min(lng, minLng)
+          maxLng = Math.max(lng, maxLng)
+        }
+      } else if (feature.geometry.type === 'Point') {
+        const [lng, lat] = coordinates
+        minLat = Math.min(lat, minLat)
+        maxLat = Math.max(lat, maxLat)
+        minLng = Math.min(lng, minLng)
+        maxLng = Math.max(lng, maxLng)
+      }
+    }
+  }
+
+  return [
+    [minLat, minLng],
+    [maxLat, maxLng]
+  ]
+}
+
+// code to calculate the zoom level .
+const calculateZoom = (bounds, mapDim) => {
+  const WORLD_DIM = { height: 256, width: 256 }
+  const ZOOM_MAX = 21
+
+  function latRad(lat) {
+    const sin = Math.sin((lat * Math.PI) / 180)
+    const radX2 = Math.log((1 + sin) / (1 - sin)) / 2
+    return Math.max(Math.min(radX2, Math.PI), -Math.PI) / 2
+  }
+
+  function zoom(mapPx, worldPx, fraction) {
+    return Math.floor(Math.log(mapPx / worldPx / fraction) / Math.LN2)
+  }
+
+  const latFraction = (latRad(bounds[1][0]) - latRad(bounds[0][0])) / Math.PI
+
+  const lngDiff = bounds[1][1] - bounds[0][1]
+  const lngFraction = (lngDiff < 0 ? lngDiff + 360 : lngDiff) / 360
+
+  const latZoom = zoom(mapDim.height, WORLD_DIM.height, latFraction)
+  const lngZoom = zoom(mapDim.width, WORLD_DIM.width, lngFraction)
+
+  return Math.min(latZoom, lngZoom, ZOOM_MAX)
+}
 // create a Map component that renders a Leaflet map and takes geoJSON data as a prop
 const Map = ({ dataLayer, datasetwithgeojson }) => {
+  const calculateMeanCoords = (dataLayer) => {
+    let minLat = Infinity
+    let maxLat = -Infinity
+    let minLng = Infinity
+    let maxLng = -Infinity
+
+    // Iterate over each item in the geojsonField array
+    for (const geojson of dataLayer) {
+      for (const feature of geojson.features) {
+        if (feature.geometry.type === 'Polygon') {
+          for (const polygon of feature.geometry.coordinates) {
+            for (const [longitude, latitude] of polygon) {
+              minLat = Math.min(latitude, minLat)
+              maxLat = Math.max(latitude, maxLat)
+              minLng = Math.min(longitude, minLng)
+              maxLng = Math.max(longitude, maxLng)
+            }
+          }
+        } else if (feature.geometry.type === 'MultiPoint') {
+          for (const [longitude, latitude] of feature.geometry.coordinates) {
+            minLat = Math.min(latitude, minLat)
+            maxLat = Math.max(latitude, maxLat)
+            minLng = Math.min(longitude, minLng)
+            maxLng = Math.max(longitude, maxLng)
+          }
+        } else if (feature.geometry.type === 'Point') {
+          const [longitude, latitude] = feature.geometry.coordinates
+          minLat = Math.min(latitude, minLat)
+          maxLat = Math.max(latitude, maxLat)
+          minLng = Math.min(longitude, minLng)
+          maxLng = Math.max(longitude, maxLng)
+        } else if (feature.geometry.type === 'LineString') {
+          for (const [longitude, latitude] of feature.geometry.coordinates) {
+            minLat = Math.min(latitude, minLat)
+            maxLat = Math.max(latitude, maxLat)
+            minLng = Math.min(longitude, minLng)
+            maxLng = Math.max(longitude, maxLng)
+          }
+        }
+      }
+    }
+
+    const meanLat = (minLat + maxLat) / 2
+    const meanLng = (minLng + maxLng) / 2
+
+    return [meanLat, meanLng]
+  }
+
+  // usage
+  const meanOfAllPoints = calculateMeanCoords(dataLayer)
+  const meanLat = meanOfAllPoints[0]
+  const meanLong = meanOfAllPoints[1]
   const itemList = []
   for (const geojson of dataLayer) {
     itemList.push(<GeoJSON data={geojson} />)
   }
   console.log('itemList', itemList)
   console.log('datasetwithgeojson', datasetwithgeojson)
+  // console.log('itemList', itemList)
+  // console.log('datasetwithgeojson', datasetwithgeojson)
+
+  const bounds = calculateBoundingBox(dataLayer)
+  const newZoom = calculateZoom(bounds, { height: 400, width: 400 })
+  console.log(bounds)
+  console.log(newZoom)
+
   const router = useRouter()
   const { lng, lat, zoom } = router.query
   // console.log(router)
@@ -397,8 +535,8 @@ const Map = ({ dataLayer, datasetwithgeojson }) => {
   })
   return (
     <MapContainer
-      center={[parseParamFloat(lat) || LAT, parseParamFloat(lng) || LNG]}
-      zoom={parseParamInt(zoom) || ZOOM}
+      center={[meanLat, meanLong]}
+      zoom={newZoom}
       scrollWheelZoom={true}
       style={{ height: 400, width: '100%', zIndex: 0 }}
     >
@@ -423,3 +561,6 @@ const Map = ({ dataLayer, datasetwithgeojson }) => {
 }
 
 export default Map
+function median(lats: any[]) {
+  throw new Error('Function not implemented.')
+}
